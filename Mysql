@@ -1,0 +1,78 @@
+=>Creating Database for spotify
+
+//create query
+
+Create database spotify;
+use spotify;
+
+//for creating table query
+
+create table users(
+    -> user_id int (20),
+    -> user_name varchar(50),
+    -> user_email varchar(200),
+    -> user_password varchar(200),
+    -> PRIMARY KEY(user_id)
+    -> );
+desc users;
+
+//for inserting values in table
+mysql> insert into users (user_id,user_name,user_email,user_password) values (1,'nilima','nilima@gmail.com','pass');
+
+
+mysql> insert into users (user_id,user_name,user_email,user_password) values (2,'naina','nain@gmail.com','pass@');
+
+
+mysql> insert into users (user_id,user_name,user_email,user_password) values (3,'nini','ni@gmailcom','pass@23');
++---------+-----------+------------------+---------------+
+| user_id | user_name | user_email       | user_password |
++---------+-----------+------------------+---------------+
+|       1 | nilima    | nilima@gmail.com | pass          |
+|       2 | naina     | nain@gmail.com   | pass@         |
+|       3 | nini      | ni@gmailcom      | pass@23       |
++---------+-----------+------------------+---------------+
+
+
+//For creating Another table for playlist
+
+mysql> create table playlist
+    -> (
+    -> playlist_id int(30),
+    -> playlist_name varchar(200),
+    -> PRIMARY KEY(playlist_id),user_id int,
+    -> FOREIGN KEY(user_id)
+    -> REFERENCES users(user_id)
+    -> );
+
+//For inserting values in table
+
+
+mysql> insert into playlist(playlist_id,playlist_name,user_id) values (2222,'devotional',1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into playlist(playlist_id,playlist_name,user_id) values (3333,'Sad',2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into playlist(playlist_id,playlist_name,user_id) values (4444,'hiphop',3);
+Query OK, 1 row affected (0.01 sec)
++-------------+---------------+---------+
+| playlist_id | playlist_name | user_id |
++-------------+---------------+---------+
+|        2222 | devotional    |       1 |
+|        3333 | Sad           |       2 |
+|        4444 | hiphop        |       3 |
++-------------+---------------+---------+
+
+
+//Joins
+
+Two table
+mysql> select users.user_id,playlist.playlist_id from users inner join playlist on users.user_id =playlist.user_id;
++---------+-------------+
+| user_id | playlist_id |
++---------+-------------+
+|       1 |        2222 |
+|       2 |        3333 |
+|       3 |        4444 |
++---------+-------------+
+
